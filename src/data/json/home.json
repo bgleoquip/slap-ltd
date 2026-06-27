@@ -1,0 +1,69 @@
+{
+  "slides": [
+    {
+      "id": 1,
+      "image": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2070&auto=format&fit=crop",
+      "title": "Sunita Leoquip",
+      "subtitle": "Precision manufacturing & custom engineering solutions since 1979.",
+      "eyebrow": "Established 1979 · 45+ Years of Excellence"
+    },
+    {
+      "id": 2,
+      "image": "https://images.unsplash.com/photo-1563968743333-044cef800537?q=80&w=1965&auto=format&fit=crop",
+      "title": "Precision Machining",
+      "subtitle": "Specialists in high-grade cast iron products, CNC turning, and precision VMC operations.",
+      "eyebrow": "State-of-the-Art Production Lines"
+    },
+    {
+      "id": 3,
+      "image": "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=2070&auto=format&fit=crop",
+      "title": "OEM Compressor Spares",
+      "subtitle": "Trusted compressor component manufacturing, engineering, and testing services for top global brands.",
+      "eyebrow": "Ingersoll Rand & OEM Approved Parts"
+    }
+  ],
+  "trustBadges": [
+    {
+      "icon": "ShieldCheck",
+      "title": "Precision Machined Quality",
+      "desc": "Every component is tested for absolute endurance and tolerances."
+    },
+    {
+      "icon": "Truck",
+      "title": "Fast Industrial Logistics",
+      "desc": "Secure cargo packaging and rapid delivery to your processing hubs."
+    },
+    {
+      "icon": "CheckCircle2",
+      "title": "45+ Years of Trust",
+      "desc": "Proudly serving OEM clients and aerospace requirements since 1979."
+    }
+  ],
+  "competencies": [
+    {
+      "icon": "Settings",
+      "title": "Custom Precision Manufacturing",
+      "desc": "Providing custom-manufactured components and precision-engineered spares, serving as a trusted supplier to leading OEMs."
+    },
+    {
+      "icon": "Layers",
+      "title": "Specialists in Cast Iron Products",
+      "desc": "Engineering high-grade, durable cast iron components using advanced metallurgy and casting methods."
+    },
+    {
+      "icon": "Cpu",
+      "title": "High Accuracy Machining",
+      "desc": "Utilizing precision VMC, CNC turning, honing, and grinding lines to build components to exact OEM specifications."
+    },
+    {
+      "icon": "Wrench",
+      "title": "Reverse Engineering & Development",
+      "desc": "Obtaining physical samples and performing full dimensional layouts and material analysis to recreate parts."
+    },
+    {
+      "icon": "Award",
+      "title": "Quality & On-Time Delivery",
+      "desc": "Maintaining a 100% quality commitment built on an engineering legacy, ensuring on-schedule dispatches."
+    }
+  ]
+}

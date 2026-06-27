@@ -1,0 +1,15 @@
+{
+  "navLinks": [
+    { "label": "Home", "path": "/" },
+    { "label": "Products", "path": "/products" },
+    { "label": "About", "path": "/about" },
+    { "label": "Contact", "path": "/contact" }
+  ],
+  "footer": {
+    "brandDescription": "Precision manufacturing specialists in high-grade cast iron products, CNC machining, and critical compressor components. Serving top OEMs since 1979.",
+    "address": "Sector 5, Industrial Area, Ahmedabad, Gujarat, India",
+    "phone": "+91 79 98765 43210",
+    "email": "support@sunitaleoquip.com",
+    "copyright": "Sunita Leoquip Aerospace Pvt. Ltd. All rights reserved."
+  }
+}

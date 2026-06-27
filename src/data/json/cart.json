@@ -1,0 +1,13 @@
+{
+  "heading": "Inquiry Cart",
+  "whatsappPhone": "919876543210",
+  "whatsappTemplate": {
+    "prefix": "Hello Sunita Leoquip, I would like to request a quotation for the following items:\n\n",
+    "suffix": "\n\nPlease confirm manufacturing availability, delivery schedules, and shipping details."
+  },
+  "emptyState": {
+    "title": "Your Inquiry Cart is Empty",
+    "description": "Looks like you haven't added any cast iron precision components or compressor spares to your inquiry cart yet.",
+    "cta": "Browse Capabilities"
+  }
+}

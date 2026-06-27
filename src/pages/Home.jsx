@@ -1,79 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { products } from '../data/products';
 import { ArrowRight, ChevronRight, CheckCircle2, ShieldCheck, Truck, Cpu, Layers, Wrench, Award, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ClientsSection } from '../components/ClientsSection';
 
-const slides = [
-  {
-    id: 1,
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2070&auto=format&fit=crop",
-    title: "Sunita Leoquip",
-    subtitle: "Precision manufacturing & custom engineering solutions since 1979.",
-    eyebrow: "Established 1979 · 45+ Years of Excellence"
-  },
-  {
-    id: 2,
-    image: "https://images.unsplash.com/photo-1563968743333-044cef800537?q=80&w=1965&auto=format&fit=crop",
-    title: "Precision Machining",
-    subtitle: "Specialists in high-grade cast iron products, CNC turning, and precision VMC operations.",
-    eyebrow: "State-of-the-Art Production Lines"
-  },
-  {
-    id: 3,
-    image: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=2070&auto=format&fit=crop",
-    title: "OEM Compressor Spares",
-    subtitle: "Trusted compressor component manufacturing, engineering, and testing services for top global brands.",
-    eyebrow: "Ingersoll Rand & OEM Approved Parts"
-  }
-];
+// JSON imports
+import homeData from '../data/json/home.json';
+import productsData from '../data/json/products.json';
 
-const competencies = [
-  {
-    icon: Settings,
-    title: "Custom Precision Manufacturing",
-    desc: "Providing custom-manufactured components and precision-engineered spares, serving as a trusted supplier to leading OEMs."
-  },
-  {
-    icon: Layers,
-    title: "Specialists in Cast Iron Products",
-    desc: "Engineering high-grade, durable cast iron components using advanced metallurgy and casting methods."
-  },
-  {
-    icon: Cpu,
-    title: "High Accuracy Machining",
-    desc: "Utilizing precision VMC, CNC turning, honing, and grinding lines to build components to exact OEM specifications."
-  },
-  {
-    icon: Wrench,
-    title: "Reverse Engineering & Development",
-    desc: "Obtaining physical samples and performing full dimensional layouts and material analysis to recreate parts."
-  },
-  {
-    icon: Award,
-    title: "Quality & On-Time Delivery",
-    desc: "Maintaining a 100% quality commitment built on an engineering legacy, ensuring on-schedule dispatches."
-  }
-];
-
-const oemClients = [
-  "Ingersoll Rand",
-  "Sunita Tools",
-  "Anest Iwata",
-  "Elgi Compressors",
-  "Chicago Pneumatic",
-  "Atlas Copco",
-  "Kirloskar Pneumatic",
-  "Leoquip Engineering"
-];
+const IconMap = {
+  Settings,
+  Layers,
+  Cpu,
+  Wrench,
+  Award,
+  ShieldCheck,
+  Truck,
+  CheckCircle2
+};
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setCurrentSlide((prev) => (prev + 1) % homeData.slides.length);
     }, 6000);
     return () => clearInterval(timer);
   }, []);
@@ -83,7 +35,7 @@ const Home = () => {
       
       {/* SECTION 1: Hero Slider (Dark Navy background/overlay) */}
       <div className="relative h-[500px] md:h-[600px] w-full overflow-hidden bg-[#040b15]">
-        {slides.map((slide, index) => (
+        {homeData.slides.map((slide, index) => (
           <div
             key={slide.id}
             className={`absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out flex items-center justify-center text-center px-4 ${
@@ -119,7 +71,7 @@ const Home = () => {
 
         {/* Slider Navigation Dots */}
         <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3">
-          {slides.map((_, idx) => (
+          {homeData.slides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
@@ -136,27 +88,18 @@ const Home = () => {
       <section className="py-10 bg-white border-b border-slate-200/60">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            <div className="flex items-center gap-4 p-4 rounded-lg bg-slate-50 border border-slate-100">
-              <ShieldCheck className="h-10 w-10 text-gold shrink-0" />
-              <div>
-                <h4 className="font-bold text-navy-800">Precision Machined Quality</h4>
-                <p className="text-xs text-slate-500">Every component is tested for absolute endurance and tolerances.</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-4 rounded-lg bg-slate-50 border border-slate-100">
-              <Truck className="h-10 w-10 text-gold shrink-0" />
-              <div>
-                <h4 className="font-bold text-navy-800">Fast Industrial Logistics</h4>
-                <p className="text-xs text-slate-500">Secure cargo packaging and rapid delivery to your processing hubs.</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-4 rounded-lg bg-slate-50 border border-slate-100">
-              <CheckCircle2 className="h-10 w-10 text-gold shrink-0" />
-              <div>
-                <h4 className="font-bold text-navy-800">45+ Years of Trust</h4>
-                <p className="text-xs text-slate-500">Proudly serving OEM clients and aerospace requirements since 1979.</p>
-              </div>
-            </div>
+            {homeData.trustBadges.map((badge, idx) => {
+              const IconComponent = IconMap[badge.icon];
+              return (
+                <div key={idx} className="flex items-center gap-4 p-4 rounded-lg bg-slate-50 border border-slate-100">
+                  {IconComponent && <IconComponent className="h-10 w-10 text-gold shrink-0" />}
+                  <div>
+                    <h4 className="font-bold text-navy-800">{badge.title}</h4>
+                    <p className="text-xs text-slate-500">{badge.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -177,12 +120,12 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {competencies.map((comp, idx) => {
-              const IconComponent = comp.icon;
+            {homeData.competencies.map((comp, idx) => {
+              const IconComponent = IconMap[comp.icon];
               return (
                 <div key={idx} className="flex flex-col bg-[#0f2040] border border-[#1a3a5c] rounded-xl p-5 hover:border-gold/45 hover:shadow-lg transition-all duration-300 group">
                   <div className="rounded-lg bg-[#0b1929] border border-[#1a3a5c] p-3 w-fit mb-4 text-slate-300 group-hover:text-gold transition-colors shadow-sm">
-                    <IconComponent className="h-5 w-5" />
+                    {IconComponent && <IconComponent className="h-5 w-5" />}
                   </div>
                   <h3 className="text-sm font-bold text-white group-hover:text-gold transition-colors mb-2 leading-snug">
                     {comp.title}
@@ -198,24 +141,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* SECTION 4: OEM Clients Banner (Light / White Background) */}
-      <section className="py-14 bg-white border-b border-slate-200/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-[10px] font-extrabold text-center text-slate-400 uppercase tracking-[0.2em] mb-6">
-            Trusted by Compressor Manufacturers & OEMs Across India
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 opacity-80">
-            {oemClients.map((client, idx) => (
-              <span 
-                key={idx} 
-                className="text-xs font-bold text-navy-700 tracking-wider hover:text-gold transition-colors select-none cursor-default py-1"
-              >
-                {client}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* SECTION 4: Interactive OEM Clients Portfolio */}
+      <ClientsSection />
 
       {/* SECTION 5: Precision Components (Dark Blue / Navy Background) */}
       <section className="py-16 sm:py-24 bg-[#040b15] text-white border-b border-[#0f2040]">
@@ -232,7 +159,7 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {products.slice(0, 3).map(product => (
+            {productsData.products.slice(0, 3).map(product => (
               <Card key={product.id} className="bg-[#0b1929] border border-[#1a3a5c] shadow-md hover:shadow-lg hover:border-gold/30 transition-all duration-300 flex flex-col justify-between rounded-xl overflow-hidden group">
                 <div>
                   <div className="relative h-48 overflow-hidden bg-[#040b15]">

@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { products, categories } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { Filter, ShoppingCart, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import productsData from '../data/json/products.json';
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -12,8 +12,8 @@ const Products = () => {
   const [addedIds, setAddedIds] = useState([]);
 
   const filteredProducts = selectedCategory === "All"
-    ? products
-    : products.filter(p => p.category === selectedCategory);
+    ? productsData.products
+    : productsData.products.filter(p => p.category === selectedCategory);
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -24,16 +24,16 @@ const Products = () => {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen py-12">
+    <div className="bg-navy-900 min-h-screen py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Page Title & Category Filters */}
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-8 mb-10">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between border-b border-navy-700 pb-8 mb-10">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-navy-800 uppercase">
+            <h1 className="text-3xl font-extrabold tracking-tight text-white uppercase">
               Capabilities Catalog
             </h1>
-            <p className="text-sm text-slate-500 mt-1">
+            <p className="text-sm text-slate-300 mt-1">
               Select standard mechanical components, cast iron components, and compressor spares.
             </p>
           </div>
@@ -44,7 +44,7 @@ const Products = () => {
               <Filter className="h-4 w-4" /> Filter:
             </span>
             <div className="flex flex-wrap gap-1.5">
-              {categories.map(cat => (
+              {productsData.categories.map(cat => (
                 <Button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
@@ -52,8 +52,8 @@ const Products = () => {
                   size="sm"
                   className={`rounded-full px-4 h-8 text-xs font-semibold cursor-pointer transition-colors ${
                     selectedCategory === cat
-                      ? 'bg-gold hover:bg-gold-light text-navy-900 shadow-sm border-gold'
-                      : 'border-slate-300 text-navy-700 hover:bg-slate-50 hover:text-navy-900 bg-white'
+                        ? 'bg-gold hover:bg-gold-light text-navy-900 shadow-sm border-gold'
+                        : 'border-navy-700 text-slate-200 hover:bg-navy-800 hover:text-white bg-navy-900'
                   }`}
                 >
                   {cat}
@@ -66,10 +66,10 @@ const Products = () => {
         {/* Product Grid */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map(product => (
-            <Card key={product.id} className="bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between rounded-xl overflow-hidden group">
+            <Card key={product.id} className="bg-white border border-navy-700 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between rounded-xl overflow-hidden group">
               <div>
                 {/* Image Section */}
-                <div className="relative h-56 overflow-hidden bg-slate-100 border-b border-slate-100">
+                <div className="relative h-56 overflow-hidden bg-navy-900 border-b border-navy-700">
                   <img 
                     src={product.image} 
                     alt={product.name} 
@@ -83,8 +83,8 @@ const Products = () => {
                 </div>
 
                 {/* Card Title & Content */}
-                <CardHeader className="p-6 pb-2">
-                  <CardTitle className="text-base font-bold text-navy-800 group-hover:text-gold transition-colors line-clamp-1">
+                  <CardHeader className="p-6 pb-2">
+                    <CardTitle className="text-base font-bold text-navy-800 group-hover:text-gold transition-colors line-clamp-1">
                     {product.name}
                   </CardTitle>
                   <CardDescription className="text-slate-500 text-xs mt-1 leading-relaxed line-clamp-3">
@@ -102,7 +102,7 @@ const Products = () => {
                 </CardContent>
 
                 {/* Action button */}
-                <CardFooter className="bg-slate-50/50 border-t border-slate-100 px-6 py-4 flex items-center justify-end">
+                <CardFooter className="bg-navy-900/40 border-t border-navy-700 px-6 py-4 flex items-center justify-end">
                   <Button
                     onClick={() => handleAddToCart(product)}
                     className={`h-9 px-4 rounded-md font-semibold text-xs flex items-center gap-1.5 transition-all shadow-sm cursor-pointer ${
